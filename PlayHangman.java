@@ -11,6 +11,7 @@ public class PlayHangman {
 	
 		HangmanGameUtilities play = new HangmanGameUtilities();
 		play.StartNewGame();
+		play.play();
 	
 	}
 	

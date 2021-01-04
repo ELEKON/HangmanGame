@@ -9,7 +9,6 @@ public class HangmanGameEntity extends GameEntity{
 		// letters already entered by user
 		private ArrayList<String> letters = new ArrayList<>();
 		
-		
 		public String getWordToFind() {
 			return wordToFind;
 		}
