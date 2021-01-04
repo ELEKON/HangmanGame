@@ -5,7 +5,7 @@ public class HangmanGameEntity extends GameEntity{
 		//the word the user must guess
 		private static String wordToFind;
 		//The word found to show the progression of the user during the Hangman Game
-		private static String[] wordFound;
+		private static char[] wordFound;
 		// letters already entered by user
 		private ArrayList<String> letters = new ArrayList<>();
 		
@@ -15,11 +15,11 @@ public class HangmanGameEntity extends GameEntity{
 		public void setWordToFind(String wordToFind) {
 			HangmanGameEntity.wordToFind = wordToFind;
 		}
-		public String[] getWordFound() {
+		public char[] getWordFound() {
 			return wordFound;
 		}
-		public void setWordFound(String[] pinakas) {
-			HangmanGameEntity.wordFound = pinakas;
+		public void setWordFound(char[] cs) {
+			HangmanGameEntity.wordFound = cs;
 		}
 		public ArrayList<String> getLetters() {
 			return letters;

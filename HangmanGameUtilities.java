@@ -1,6 +1,5 @@
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -8,10 +7,10 @@ import java.util.Scanner;
 //pou antiprosopevei tis vasikes methods afwn twn games
 public class HangmanGameUtilities {
 
-	//constructor of HangmanGameEntity class
-	
-			private HangmanGameEntity newGame = new HangmanGameEntity();
-	
+			//create an instaance of HangmanGameEntity
+			HangmanGameEntity newGame = new HangmanGameEntity();
+			
+
 			//method of word selection, for each new run	
 			@SuppressWarnings("resource")
 			public String chooseFromExistingWords() throws Exception  {
@@ -41,24 +40,21 @@ public class HangmanGameUtilities {
 				
 				int wordSize = newGame.getWordToFind().length();
 			
-				String[] pinakas = new String [wordSize];
+				newGame.setWordFound(new char[wordSize]);
 				
-				for (int i = 0; i < pinakas.length; i++) {
-					pinakas[i] =  " _ ";
+				for (int i = 0; i < newGame.getWordFound().length; i++) {
+					newGame.getWordFound()[i] =  '+';
 				}
 				
-				newGame.setWordFound(pinakas);
-				
-				//deikse mou ton pinaka ths lekshs pou psaxnw na vrw sto guro 
-				//System.out.println(Arrays.toString(newGame.getWordFound()));
 			}
 		
 			//method pou sou gurnaei true an h wordToFind einai idia me ton pinaka wordFound
-		
-			@SuppressWarnings("unlikely-arg-type")
+			
 			public boolean wordFound() {
+				// helper gia na lunw to grufo mexri na ftoiaksw teleiws ola ta themata
+				System.out.println(newGame.getWordToFind().toString());
 				
-				if(newGame.getWordToFind().equals(newGame.getWordFound())) {
+				if(newGame.getWordToFind().contentEquals(new String (newGame.getWordFound()))){
 					return HangmanGameConstants.nice;
 				}else{
 					return !HangmanGameConstants.nice;
@@ -68,14 +64,15 @@ public class HangmanGameUtilities {
 			//method updating the wordFound table after user enter a character
 			
 			public void UpdateWordFoundTable(String entry) {
-				//HangmanGameEntity newGame = new HangmanGameEntity();
+
 				//update only when a character has not already be entered		
 				if(!newGame.getLetters().contains(entry)) {
+					
 					if (newGame.getWordToFind().contains(entry)) {
 						int index = newGame.getWordToFind().indexOf(entry);
 						
 						while (index >=0 ) {
-							newGame.getWordFound()[index] = entry;
+							newGame.getWordFound()[index] = entry.charAt(0);
 							index = newGame.getWordToFind().indexOf(entry, index + 1);
 						}
 					}else {
@@ -96,7 +93,7 @@ public class HangmanGameUtilities {
 				//whereas z.insert(4, "le") would alter the string builder to contain "starlet".
 				//HangmanGameEntity newGame = new HangmanGameEntity();
 
-				for(int i = 0; i< newGame.getWordFound().length; i ++) {
+				for(int i = 0; i< newGame.getWordFound().length; i++) {
 					builder.append(newGame.getWordFound()[i]);
 					
 				}
@@ -112,7 +109,7 @@ public class HangmanGameUtilities {
 					while (newGame.numberOfErrors < HangmanGameConstants.MAX_ERRORS) {
 						System.out.println("\nEnter a letter : ");
 						String string = input.next();
-						
+												
 						UpdateWordFoundTable(string);
 						
 						System.out.println("\n" + wordFoundContent());
