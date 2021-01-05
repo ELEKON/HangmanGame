@@ -49,9 +49,9 @@ public class HangmanGameLogic implements PlayGame{
 				newGame.setLetters(empty);
 				
 				newGame.setWordToFind(wordSelection()); 
-				
-				final int wordSize = newGame.getWordToFind().length();
 			
+				final int wordSize = newGame.getWordToFind().length();
+
 				newGame.setWordFound(new char[wordSize]);
 				
 				for (int i = 0; i < newGame.getWordFound().length; i++) {
