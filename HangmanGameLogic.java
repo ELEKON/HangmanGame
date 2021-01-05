@@ -1,41 +1,45 @@
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
-//extra methods gia Handman Game alla kai implement orismenes methods apo to interface
-//pou antiprosopevei tis vasikes methods afwn twn games
-public class HangmanGameUtilities {
+public class HangmanGameLogic implements PlayGame{
 
-			//create an instaance of HangmanGameEntity
+			//create a HangmanGameEntity Object
 			HangmanGameEntity newGame = new HangmanGameEntity();
-			
+			private int numberOfErrors;
 
 			//method of word selection, for each new run	
 			@SuppressWarnings("resource")
 			public String chooseFromExistingWords() throws Exception  {
-				// pass the path to the file as a parameter 
+				// pass the text file path as parameter 
 				File file = new File("C:\\Users\\EleutheriadisK\\eclipse-workspace\\Hangman\\src\\AllExistingWords"); 
 				Scanner sc;
 				sc = new Scanner(file);
-				// na to kanw me new lines
 				String[] words = sc.next().split(","); 
 				Random rand = new Random();
 				int randomElement = rand.nextInt(words.length);
 				return words[randomElement];
-
 			}
+			
+			 public String getRandomElement(List<String> list) 
+			    { 
+			        Random rand = new Random(); 
+			        return list.get(rand.nextInt(list.size())); 
+			    } 
 		
 			//method of new run of the game
 			public void StartNewGame() throws Exception {
+				//---------------Me TO POU KSEKINAEI TO PAIXNIDI--------------------//
+				//pinakas grammatwn pou exei dwsei o xrhsths adeiazei				//
+				//nea leksh mpainei sto paixnidi									//
+				//pinakas word Found BE instantiated vasei tou megethous ts lekshs  //		
+				//------------------------------------------------------------------//
 				
-				//set Number of player Errors to zero
-				newGame.numberOfErrors= 0;
-				//set an empty string Array List to letters that player has use
 				ArrayList<String> empty = new ArrayList<>();
 				newGame.setLetters(empty);
 				
-				//h wordToFind einai h leksh tou newGame
 				newGame.setWordToFind(chooseFromExistingWords()); 
 				
 				int wordSize = newGame.getWordToFind().length();
@@ -48,21 +52,20 @@ public class HangmanGameUtilities {
 				
 			}
 		
-			//method pou sou gurnaei true an h wordToFind einai idia me ton pinaka wordFound
-			
+			//method pou sou gurnaei true an h wordToFind einai idia me ton pinaka wordFound alliws false
 			public boolean wordFound() {
 				// helper gia na lunw to grufo mexri na ftoiaksw teleiws ola ta themata
-				System.out.println(newGame.getWordToFind().toString());
-				
+				//System.out.println(newGame.getWordToFind().toString());
 				if(newGame.getWordToFind().contentEquals(new String (newGame.getWordFound()))){
-					return HangmanGameConstants.nice;
+					newGame.setWin(true);
+					return newGame.isWin();
 				}else{
-					return !HangmanGameConstants.nice;
+					newGame.setWin(false);
+					return newGame.isWin();
 				}
 			}
 			
-			//method updating the wordFound table after user enter a character
-			
+			//method updating the wordFound table after user enter a character that match
 			public void UpdateWordFoundTable(String entry) {
 
 				//update only when a character has not already be entered		
@@ -76,15 +79,13 @@ public class HangmanGameUtilities {
 							index = newGame.getWordToFind().indexOf(entry, index + 1);
 						}
 					}else {
-						newGame.numberOfErrors++;
+						numberOfErrors++;
 					}
 					newGame.getLetters().add(entry);
 				}
-//			
 			}
 			
 			//method returning the state of the word found by the user until by now
-			
 			private String wordFoundContent() {
 				StringBuilder builder = new StringBuilder();
 				//StringBuilder usage For example, if z refers to a string builder object whose current 
@@ -106,23 +107,24 @@ public class HangmanGameUtilities {
 					
 					System.out.println("\nHello Hangman Player!!! Have a nice Game!!! ");
 					
-					while (newGame.numberOfErrors < HangmanGameConstants.MAX_ERRORS) {
+					while (numberOfErrors < HangmanGameConstants.MAX_ERRORS) {
 						System.out.println("\nEnter a letter : ");
 						String string = input.next();
 												
 						UpdateWordFoundTable(string);
-						
 						System.out.println("\n" + wordFoundContent());
 						
+						System.out.println("\n Your entries are: " + newGame.getLetters());
+
 						if(wordFound()) {
 							System.out.println("\n You win lucky!");
 							break;
 						}else {
-							System.out.println("\n Number of tries remaining:" + (HangmanGameConstants.MAX_ERRORS - newGame.numberOfErrors));
+							System.out.println("\n Number of tries remaining:" + (HangmanGameConstants.MAX_ERRORS - numberOfErrors));
 						}
 					}
 					
-					if (newGame.numberOfErrors == HangmanGameConstants.MAX_ERRORS) {
+					if (numberOfErrors == HangmanGameConstants.MAX_ERRORS) {
 						System.out.println("\n Sorry, but you lost :( ");
 						System.out.println("\n The word was : " + newGame.getWordToFind());
 					}

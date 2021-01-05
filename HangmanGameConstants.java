@@ -1,8 +1,6 @@
 
 public class HangmanGameConstants {
-	//The number of errors made by the user when trying to guess the word
+	//The number of errors which user made,tried to guess the solution
 	public static final int MAX_ERRORS = 10;
-	//public static final int numberOfPlayerErrors = 0;
-	public static final boolean nice = true;
 	
 }

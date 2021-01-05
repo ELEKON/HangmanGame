@@ -2,11 +2,11 @@ import java.util.ArrayList;
 
 public class HangmanGameEntity extends GameEntity{
 	
-		//the word the user must guess
+		//The word which user must guess
 		private static String wordToFind;
-		//The word found to show the progression of the user during the Hangman Game
+		//The word found table shows the progress of the user during the Hangman Game
 		private static char[] wordFound;
-		// letters already entered by user
+		//Table letters stores tha letters which already entered by user
 		private ArrayList<String> letters = new ArrayList<>();
 		
 		public String getWordToFind() {

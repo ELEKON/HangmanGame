@@ -1,20 +1,14 @@
 
 public class GameEntity {
+	//se ena paixnidi h mporoume na xasoume h mporoume na kerdisoume
 	private boolean win;
-	//private int numberOfErrors;
-	
-	public int numberOfErrors;
+
 	public boolean isWin() {
 		return win;
 	}
+
 	public void setWin(boolean win) {
 		this.win = win;
 	}
-//	public int getNumberOfErrors() {
-//		return numberOfErrors;
-//	}
-//	public void setNumberOfErrors(int numberOfErrors) {
-//		this.numberOfErrors = numberOfErrors;
-//	}
 	
 }

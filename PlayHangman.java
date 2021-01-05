@@ -5,7 +5,7 @@ public class PlayHangman {
 	  
 		//wait for calling the right methods
 		
-		HangmanGameUtilities play = new HangmanGameUtilities();
+		HangmanGameLogic play = new HangmanGameLogic();
 		play.StartNewGame();
 		play.play();
 	
