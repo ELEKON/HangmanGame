@@ -12,12 +12,9 @@ public class HangmanGameLogic implements PlayGame{
 	
 			private HangmanGameEntity newGame = new HangmanGameEntity();
 		
-
 			private int numberOfErrors;
 			
 			//method of word selection, for each new run	
-<<<<<<< HEAD
-
 			@SuppressWarnings("resource")
 			public String wordSelection() throws Exception  {
 				
@@ -35,25 +32,6 @@ public class HangmanGameLogic implements PlayGame{
 				    Random rand = new Random(System.currentTimeMillis());
 				    String randomWord = words.get(rand.nextInt(words.size()));
 					return randomWord.toLowerCase();
-=======
-			public String wordSelection() throws Exception  {
-
-				@SuppressWarnings("resource")
-				BufferedReader reader = new BufferedReader(new FileReader(HangmanGameConstants.WORDS_TXT_FILE));
-			    String line = reader.readLine();
-			    List<String> words = new ArrayList<String>();
-			    while(line != null) {
-			        String[] wordsLine = line.split(HangmanGameConstants.line_splitter);
-			        for(String word : wordsLine) {
-			            words.add(word);
-			        }
-			        line = reader.readLine();
-			    }
-			    
-			    Random rand = new Random(System.currentTimeMillis());
-			    String randomWord = words.get(rand.nextInt(words.size()));
-			    return randomWord.toLowerCase();
->>>>>>> e6bdb53 (fixes with my constants)
 			}
 			
 			//method of new run of the game
@@ -66,18 +44,10 @@ public class HangmanGameLogic implements PlayGame{
 				
 				ArrayList<String> empty = new ArrayList<>();
 				newGame.setLetters(empty);
-<<<<<<< HEAD
+				newGame.setWordToFind(wordSelection());  
 
-				newGame.setWordToFind(wordSelection()); 
-			 
-=======
-				
-				newGame.setWordToFind(wordSelection()); 
->>>>>>> e6bdb53 (fixes with my constants)
 				//final gia na to pairnei sigoura meta to idio
 				final int wordSize= newGame.getWordToFind().length(); 
-	
-		
 				newGame.setWordFound(new char[wordSize]);
 				
 				for (int i = 0; i < newGame.getWordFound().length; i++) {
@@ -121,11 +91,7 @@ public class HangmanGameLogic implements PlayGame{
 			//method returning the state of the word found by the user until by now
 			private String wordFoundContent() {
 				StringBuilder builder = new StringBuilder();
-<<<<<<< HEAD
-	
-=======
 
->>>>>>> e6bdb53 (fixes with my constants)
 				for(int i = 0; i< newGame.getWordFound().length; i++) {
 					builder.append(newGame.getWordFound()[i]);
 				}
@@ -134,20 +100,13 @@ public class HangmanGameLogic implements PlayGame{
 			
 			public void play() {
 				try(Scanner input = new Scanner(System.in)){					
-					
-<<<<<<< HEAD
+
 					System.out.println(HangmanGameConstants.Welcoming_Message);
 					
 					while (numberOfErrors < HangmanGameConstants.MAX_ERRORS) {
 						System.out.println(HangmanGameConstants.Rules_Message);
-						String string = input.next();
-												
-=======
-					System.out.println(HangmanGameConstants.Welcomming_Message);
-					while (numberOfErrors < HangmanGameConstants.MAX_ERRORS) {
-						System.out.println(HangmanGameConstants.GameInstructions_Message);
 						String string = input.next();						
->>>>>>> e6bdb53 (fixes with my constants)
+
 						UpdateWordFoundTable(string);
 						System.out.println("\n" + wordFoundContent());
 						System.out.println(HangmanGameConstants.Entries_Message + newGame.getLetters());
@@ -161,14 +120,13 @@ public class HangmanGameLogic implements PlayGame{
 					}
 					
 					if (numberOfErrors == HangmanGameConstants.MAX_ERRORS) {
-<<<<<<< HEAD
+
 						System.out.println(HangmanGameConstants.Lose_Message);
-=======
-						System.out.println(HangmanGameConstants.lose_Message);
->>>>>>> e6bdb53 (fixes with my constants)
+
+
 						System.out.println("\n The word was : " + newGame.getWordToFind());
 					}
+
 				}
 			}
-
 }
