@@ -9,5 +9,4 @@ public class HangmanGameConstants {
 	public static final String Rules_Message = "\nEnter a letter to lowerCase form please : ";
 	public static final String Winning_Message ="\n You win lucky!";
 	public static final String Lose_Message = "\n Sorry, but you lost :(, Try again! ";
-
 }

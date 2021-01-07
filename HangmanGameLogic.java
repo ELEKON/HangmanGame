@@ -12,6 +12,7 @@ public class HangmanGameLogic implements PlayGame{
 			private int numberOfErrors;
 
 			//method of word selection, for each new run	
+
 			@SuppressWarnings("resource")
 			public String wordSelection() throws Exception  {
 				
@@ -30,12 +31,6 @@ public class HangmanGameLogic implements PlayGame{
 				    String randomWord = words.get(rand.nextInt(words.size()));
 					return randomWord.toLowerCase();
 			}
-			
-			 public String getRandomElement(List<String> list) 
-			    { 
-			        Random rand = new Random(); 
-			        return list.get(rand.nextInt(list.size())); 
-			    } 
 		
 			//method of new run of the game
 			public void StartNewGame() throws Exception {
@@ -47,11 +42,13 @@ public class HangmanGameLogic implements PlayGame{
 				
 				ArrayList<String> empty = new ArrayList<>();
 				newGame.setLetters(empty);
-				
-				newGame.setWordToFind(wordSelection()); 
-			
-				final int wordSize = newGame.getWordToFind().length();
 
+				newGame.setWordToFind(wordSelection()); 
+			 
+				//final gia na to pairnei sigoura meta to idio
+				final int wordSize= newGame.getWordToFind().length(); 
+	
+		
 				newGame.setWordFound(new char[wordSize]);
 				
 				for (int i = 0; i < newGame.getWordFound().length; i++) {
