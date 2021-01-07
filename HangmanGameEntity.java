@@ -4,9 +4,9 @@ public class HangmanGameEntity extends GameEntity{
 	
 		//The word which user must guess
 		private static String wordToFind;
-		//The word found table shows the progress of the user during the Hangman Game
+		//The word found table shows the progress of the user during the HangmanGame
 		private static char[] wordFound;
-		//Table letters stores tha letters which already entered by user
+		//Table letters stores the letters which already entered by user
 		private ArrayList<String> letters = new ArrayList<>();
 		
 		public String getWordToFind() {
