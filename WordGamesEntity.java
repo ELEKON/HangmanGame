@@ -1,6 +1,6 @@
 
-public class GameEntity {
-	//se ena paixnidi h mporoume na xasoume h mporoume na kerdisoume
+public class WordGamesEntity {
+	//when i play a game i can win or loose
 	private boolean win;
 
 	public boolean isWin() {

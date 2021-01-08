@@ -1,14 +1,10 @@
 public class PlayHangman {
-
 	
-	public static void main(String[] args) throws Exception { 
-	  
-		//wait for calling the right methods
+	public static void main(String[] args)  { 
 		
-		HangmanGameLogic play = new HangmanGameLogic();
-		play.StartNewGame();
-		play.play();
-	
+		WordGamesUtilities startGame = new WordGamesUtilities();
+		startGame.Startgame();		
+		HangmanGameUtilities newGame  = new HangmanGameUtilities();
+		newGame.play();
+		}
 	}
-	
-}	

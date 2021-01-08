@@ -8,6 +8,11 @@ public class HangmanGameConstants {
 	public static final String Welcoming_Message = "\nHello Hangman Player!!! Have a nice Game!!! ";
 	public static final String Rules_Message = "\nEnter a letter to lowerCase form please : ";
 	public static final String Winning_Message ="\n You win lucky!";
-	public static final String Lose_Message = "\n Sorry, but you lost :(, Try again! ";
+	public static final String Lose_Message = "\n Sorry, but you lost :( ";
 	public static final String Entries_Message = "\n Your entries are: ";
+	public static final String Tries_Remaining ="\n Number of tries remaining:";
+	public static final String The_Word_Was ="\n The word was : ";
+	public static final String Word_ExceptionMessage ="There is a problem with the Selection of the word";
+	public static final String TxtFile_ExceptionMessage = "Problem with reading of txt file";
+	public static final String NotValidValue_Message = "Invalid Entry";
 }

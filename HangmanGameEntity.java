@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class HangmanGameEntity extends GameEntity{
+public class HangmanGameEntity extends WordGamesEntity{
 	
 		//The word which user must guess
 		private static String wordToFind;
