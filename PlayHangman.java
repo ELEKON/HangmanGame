@@ -1,10 +1,21 @@
 public class PlayHangman {
 	
-	public static void main(String[] args)  { 
+	public static void main(String[] args) throws Exception  { 
 		
-		WordGamesUtilities startGame = new WordGamesUtilities();
-		startGame.Startgame();		
-		HangmanGameUtilities newGame  = new HangmanGameUtilities();
-		newGame.play();
-		}
+		HangmanGameEntity entity = new HangmanGameEntity();
+		WordGamesLogic startGame = new WordGamesLogic(entity);
+		
+		startGame.StartGame();
+		HangmanGameLogic play = new HangmanGameLogic(entity,startGame);
+		
+		play.play();
+		
+//		HangmanGameEntity entity = new HangmanGameEntity();
+//		WordGamesLogic startGame = new WordGamesLogic();
+//		startGame.setEntity(entity);
+		
+		
+	
 	}
+	}
+	
