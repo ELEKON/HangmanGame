@@ -5,17 +5,10 @@ public class PlayHangman {
 		HangmanGameEntity entity = new HangmanGameEntity();
 		WordGamesLogic startGame = new WordGamesLogic(entity);
 		
-		startGame.StartGame();
-		HangmanGameLogic play = new HangmanGameLogic(entity,startGame);
-		
-		play.play();
-		
-//		HangmanGameEntity entity = new HangmanGameEntity();
-//		WordGamesLogic startGame = new WordGamesLogic();
-//		startGame.setEntity(entity);
-		
-		
-	
+		startGame.startGame();
+		HangmanGameLogic player = new HangmanGameLogic(entity,startGame);
+
+		player.play();
 	}
-	}
+}
 	

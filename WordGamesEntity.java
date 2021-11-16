@@ -1,8 +1,8 @@
 
 public class WordGamesEntity {
-	//when i play a game i can win or loose
+	//flag gor win or loose
 	private boolean win;
-	
+	//total ammount of player attempts, change it if you want
 	public static final int MAX_ERRORS = 10;
 
 

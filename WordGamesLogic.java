@@ -10,68 +10,67 @@ public class WordGamesLogic{
 		this.HangmanEntity = hangmanGameEntity;
 	}
 
-	public void StartGame()  {
-		//---------------Me TO POU KSEKINAEI TO PAIXNIDI--------------------//
-		//user entries table become empty									//
-		//find new word, for new run	 									//
-		//table wordFound BE instantiated based on word length			    //		
-		//------------------------------------------------------------------//
+	public void startGame()  {
+		//---------------PROCESS WHEN GAME STARTS--------------------//
+		//1)user entries table become empty							 //
+		//2)New word selection, from existing file  				 //
+		//3)table wordFound BE instantiated based on word length     //
+		//-----------------------------------------------------------//
 		
-		List<String> empty = new ArrayList<>();
-		HangmanEntity.setLetters(empty);
+		List<String> userEntries = new ArrayList<>();
+		HangmanEntity.setAlreadyGivenLetters(userEntries);
 		
 		try {
-		HangmanEntity.setWordToFind(WordGamesUtilities.wordSelection());
-
-		}catch(Exception ex){
-			System.out.println(HangmanGameConstants.WORD_EXCEPTION_MESSAGE);
+			HangmanEntity.setWordOfGame(WordGamesUtilities.wordSelectionFromFile());
+		} catch(Exception ex) {
+			System.out.println(HangmanGameConstants.WORD_EXCEPTION_MESSAGE + ex);
 		}
 		
 		//final wordSize to be sure that its value be same at runtime 
-		final int wordSize= HangmanEntity.getWordToFind().length(); 
-		HangmanEntity.setWordFound(new char[wordSize]);
+		final int wordSize= HangmanEntity.getWordOfGame().length();
+		HangmanEntity.setWordStateDuringGame(new char[wordSize]);
 		
 		for (int i = 0; i < wordSize; i++) {
 			
-			HangmanEntity.getWordFound()[i] =  HangmanGameConstants.LETTER_MASK;
+			HangmanEntity.getWordStateDuringGame()[i] =  HangmanGameConstants.LETTER_MASK;
 		}
 	}
 		
 	//method wordFound returns true if wordToFind==wordFound else returns false
-	public boolean wordFound() {
+	public boolean playerFoundTheWord() {
 		//System.out.println(HangmanEntity.getWordToFind().toString());
-		if(HangmanEntity.getWordToFind().contentEquals(new String (HangmanEntity.getWordFound()))){
+		if (HangmanEntity.getWordOfGame().contentEquals(new String (HangmanEntity.getWordStateDuringGame()))) {
 			HangmanEntity.setWin(true);
 			return HangmanEntity.isWin();
-		}else{
+		} else{
 			HangmanEntity.setWin(false);
 			return HangmanEntity.isWin();
 		}
 	}
 	
-	//method updating the wordFound table after user enter a character that match
-	public void UpdateWordFoundTable(String entry) {
+	//method updating the wordStateDuringGame table after user enter a character that match
+	public void UpdateWordDuringGame(String entry) {
 		
 		//update only when a character has not already be entered		
-		if(!HangmanEntity.getLetters().contains(entry) && entry.length() == 1) {
+		if(!HangmanEntity.getAlreadyGivenLetters().contains(entry) && entry.length() == 1) {
 			
-			if (HangmanEntity.getWordToFind().contains(entry)) {
-				int index = HangmanEntity.getWordToFind().indexOf(entry);
+			if (HangmanEntity.getWordOfGame().contains(entry)) {
+				int index = HangmanEntity.getWordOfGame().indexOf(entry);
 				
-				while (index >=0 ) {
-					HangmanEntity.getWordFound()[index] = entry.charAt(0);
-					index = HangmanEntity.getWordToFind().indexOf(entry, index + 1);
+				while (index >= 0) {
+					HangmanEntity.getWordStateDuringGame()[index] = entry.charAt(0);
+					index = HangmanEntity.getWordOfGame().indexOf(entry, index + 1);
 				}
 			}else {
-				
-				int numberOfErrors=HangmanEntity.numberOfErrors + 1;
+				int numberOfErrors = HangmanEntity.getNumberOfErrors();
+				numberOfErrors++;
 				HangmanEntity.setNumberOfErrors(numberOfErrors);
 			}
-			HangmanEntity.getLetters().add(entry);
-			System.out.println(HangmanGameConstants.ENTRIES_MESSAGE + HangmanEntity.getLetters());
-		}else {
+			HangmanEntity.getAlreadyGivenLetters().add(entry);
+			System.out.println(HangmanGameConstants.ENTRIES_MESSAGE + HangmanEntity.getAlreadyGivenLetters());
+		} else {
 		System.out.println("//////////" + HangmanGameConstants.NOT_VALID_VALUE_MESSAGE + "//////////");
-		System.out.println(HangmanGameConstants.ENTRIES_MESSAGE + HangmanEntity.getLetters());
+		System.out.println(HangmanGameConstants.ENTRIES_MESSAGE + HangmanEntity.getAlreadyGivenLetters());
 
 		}
 	}
@@ -80,8 +79,8 @@ public class WordGamesLogic{
 	public String wordFoundContent() {
 		StringBuilder builder = new StringBuilder();
 
-		for(int i = 0; i< HangmanEntity.getWordFound().length; i++) {
-			builder.append(HangmanEntity.getWordFound()[i]);
+		for(int i = 0; i< HangmanEntity.getWordStateDuringGame().length; i++) {
+			builder.append(HangmanEntity.getWordStateDuringGame()[i]);
 		}
 		return builder.toString();
 	}
